@@ -16,20 +16,23 @@ Follow the steps detailed [here](https://community.sap.com/t5/technology-blogs-b
 
 ### Configure OIDC Trust between BTP and Cloud Identity Services
 Follow the steps detailed [here](https://help.sap.com/docs/btp/sap-business-technology-platform/establishing-trust-automatically)
-- In this application choose…
+
+### Create Application API in Cloud Identity Services
+- In this application created in the previous step choose…
   -	Application APIs -> Client Authentication
   -	Add new Secrets for with OpenID API Access
   -	Set the client id and secret as export parameters as well as the url to your Cloud Identity tenant
     
 ```
 export IAS_TENANT='<your cloud identity tenant>'
-export client_id='<your client_id>'
-export client_secret='<your client_secret>'
-export IAS_ENCODED_CREDENTIALS=$(echo -n "$client_id:$client_secret" | base64)
+export IAS_clientid='<your client_id>'
+export IAS_clientSecret='<your client_secret>'
+export IAS_ENCODED_CREDENTIALS=$(echo -n "$IAS_clientid:$IAS_clientSecret" | base64)
 ```
 
 ### Create Process Integration Runtime Instance
 In BTP create a Process Integration Runtime service instance with the grant type **urn:ietf:params:oauth:grant-type:jwt-bearer**
+> **Note**: Instead of using ESBMessaging.send a custom role may be preferred
 ```
 {
     "grant-types": [
@@ -45,9 +48,9 @@ In BTP create a Process Integration Runtime service instance with the grant type
 Using the values from the service instance set the clientid, clientsecret, tokenurl
 
 ```
-export PIR_CLIENTID='<your okta id_token>'
-export PIR_CLIENTSECRET='<your okta id_token>'
-export PIR_TOKENURL='<your okta id_token>'
+export PIR_CLIENTID='<your Process Integration Runtime client id>'
+export PIR_CLIENTSECRET='<your Process Integration Runtime client secret>'
+export PIR_TOKENURL='<your Process Integration Runtime token url>'
 ```
 
 ### Obtain **id_token** from Okta and set as parameter
@@ -59,7 +62,7 @@ This can be acheived either by using [oidc-sample-app](https://github.com/jcawle
 export ID_TOKEN_OKTA='<your okta id_token>'
 ```
 
-#### Call Cloud Identity to exchange the token id
+### Call Cloud Identity to exchange the token id
 ```
 curl --location $IAS_TENANT'/oauth2/token' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
@@ -73,7 +76,7 @@ curl --location $IAS_TENANT'/oauth2/token' \
 export ID_TOKEN_IAS='<your ias id_token>'
 ```
 
-#### Call XSUAA for a token exchange
+### Call XSUAA for a token exchange
 ```
 curl --location $PIR_TOKENURL \
 --header 'Content-Type: application/x-www-form-urlencoded' \
@@ -88,21 +91,21 @@ curl --location $PIR_TOKENURL \
 export ACCESS_TOKEN_XSUAA='<your XSUAA access_token>'
 ```
 
-#### Call the flow
+### Call the flow
 ```
 curl --location --request POST 'https://<your example flow>/http/ppuser' \
 --header 'Authorization: Bearer '$ACCESS_TOKEN_XSUAA
 ```
 
-#### Use API Management
+### Use API Management
 - Upload the file exchangeDemo.zip
 - Create a Key Value Map with the following data
   
 |  Name  |  Value|
 | -------- | ------- |
-|IAS-clientid|--|
-|IAS-clientSecret|---|
-|IAS-tokenurl|---|
-|XSUAA-clientid|---|
-|XSUAA-clientSecret|---|
-|XSUAA-tokenurl|---|
+|IAS-clientid|The client id value from the step [Create Application API in Cloud Identity Services](#create-application-api-in-cloud-identity-services)|
+|IAS-clientSecret|The client secret value from the step [Create Application API in Cloud Identity Services](#create-application-api-in-cloud-identity-services)|
+|IAS-tokenurl|The token url value from the step [Create Application API in Cloud Identity Services](#create-application-api-in-cloud-identity-services)|
+|XSUAA-clientid|The client id value from the step [Process Integration Runtime](#create-process-integration-runtime-instance)|
+|XSUAA-clientSecret|The client secret value from the step [Process Integration Runtime](#create-process-integration-runtime-instance)|
+|XSUAA-tokenurl|The token url value from the step [Process Integration Runtime](#create-process-integration-runtime-instance)|

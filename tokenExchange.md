@@ -92,3 +92,17 @@ export ACCESS_TOKEN_XSUAA='<your XSUAA access_token>'
 ```
 curl --location --request POST 'https://<your example flow>/http/ppuser' \
 --header 'Authorization: Bearer '$ACCESS_TOKEN_XSUAA
+```
+
+#### Use API Management
+- Upload the file exchangeDemo.zip
+- Create a Key Value Map with the following data
+  
+|  Name  |  Value|
+| -------- | ------- |
+|IAS-clientid|--|
+|IAS-clientSecret|---|
+|IAS-tokenurl|---|
+|XSUAA-clientid|---|
+|XSUAA-clientSecret|---|
+|XSUAA-tokenurl|---|

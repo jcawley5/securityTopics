@@ -115,11 +115,15 @@ curl --location --request POST 'https://<your example flow>/http/ppuser' \
 - Choose API Proxies, Import API and choose exchangeDemo.zip
 - Edit the Target EndPoint to point to your desired Integration flow
 - Save and deploy
-- 
 ### Call the API Proxy
+- Set the url to the proxy
+  
 ```
 export API_Proxy_URL='<your API Proxy URL>'
+```
 
+- Call the URL
+```
 curl --location --request POST $API_Proxy_URL \
 --header 'assertion: '$ID_TOKEN_OKTA
 ```

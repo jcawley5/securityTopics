@@ -111,7 +111,7 @@ curl --location --request POST 'https://<your example flow>/http/ppuser' \
 |XSUAA-clientSecret|The client secret value from the step [Process Integration Runtime](#create-process-integration-runtime-instance)|
 |XSUAA-tokenurl|The token url value from the step [Process Integration Runtime](#create-process-integration-runtime-instance)|
 
-- Download the [ExchangeDemo API Proxy](./ExchangeDemo.zip?raw=true) example.
+- Download the [ExchangeDemo API Proxy](../raw/ExchangeDemo.zip) example.
 - Choose API Proxies, Import API and choose ExchangeDemo.zip
 - Edit the Target EndPoint to point to your desired Integration flow
 - Save and deploy

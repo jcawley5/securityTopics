@@ -99,9 +99,7 @@ curl --location --request POST 'https://<your example flow>/http/ppuser' \
 
 ### Use API Management
 - Within your CIS tenant, choose Configure -> APIs
-- Choose Import API and choose exchangeDemo.zip
-- Edit the Target EndPoint to point to your desired Integration flow
-- Save and deploy
+- Choose Key Value Maps
 - Create a Key Value Map with the following data
   
 |  Name  |  Value|
@@ -113,6 +111,11 @@ curl --location --request POST 'https://<your example flow>/http/ppuser' \
 |XSUAA-clientSecret|The client secret value from the step [Process Integration Runtime](#create-process-integration-runtime-instance)|
 |XSUAA-tokenurl|The token url value from the step [Process Integration Runtime](#create-process-integration-runtime-instance)|
 
+
+- Choose API Proxies, Import API and choose exchangeDemo.zip
+- Edit the Target EndPoint to point to your desired Integration flow
+- Save and deploy
+- 
 ### Call the API Proxy
 ```
 export API_Proxy_URL='<your API Proxy URL>'

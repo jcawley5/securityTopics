@@ -125,5 +125,6 @@ export API_Proxy_URL='<your API Proxy URL>'
 - Call the URL
 ```
 curl --location --request POST $API_Proxy_URL \
---header 'assertion: '$ID_TOKEN_OKTA
+--header 'assertion: '$ID_TOKEN_OKTA \
+--header 'Content-Length: 0'
 ```

@@ -100,7 +100,7 @@ curl --location --request POST 'https://<your example flow>/http/ppuser' \
 ### Use API Management
 - Within your CIS tenant, choose Configure -> APIs
 - Choose Key Value Maps
-- Create a Key Value Map with the following data
+- Create a Key Value Map named *exchangeDemo* with the following data
   
 |  Name  |  Value|
 | -------- | ------- |

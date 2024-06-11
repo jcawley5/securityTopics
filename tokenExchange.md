@@ -106,10 +106,10 @@ curl --location --request POST 'https://<your example flow>/http/ppuser' \
 | -------- | ------- |
 |IAS-clientid|The client id value from the step [Create Application API in Cloud Identity Services](#create-application-api-in-cloud-identity-services)|
 |IAS-clientSecret|The client secret value from the step [Create Application API in Cloud Identity Services](#create-application-api-in-cloud-identity-services)|
-|IAS-tokenurl|The token url value from the step [Create Application API in Cloud Identity Services](#create-application-api-in-cloud-identity-services)|
+|IAS-tokenurl|The token url value **without https://** from the step [Create Application API in Cloud Identity Services](#create-application-api-in-cloud-identity-services)|
 |XSUAA-clientid|The client id value from the step [Process Integration Runtime](#create-process-integration-runtime-instance)|
 |XSUAA-clientSecret|The client secret value from the step [Process Integration Runtime](#create-process-integration-runtime-instance)|
-|XSUAA-tokenurl|The token url value from the step [Process Integration Runtime](#create-process-integration-runtime-instance)|
+|XSUAA-tokenurl|The token url value **without https://** from the step [Process Integration Runtime](#create-process-integration-runtime-instance)|
 
 - Download the [ExchangeDemo API Proxy](../../raw/main/ExchangeDemo.zip) example.
 - Choose API Proxies, Import API and choose ExchangeDemo.zip
